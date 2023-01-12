@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model tb_queue {
+  id_queue     Int      @id @default(autoincrement())
+  name         String
+  phone_number String
+  createdAt    DateTime @default(now())
+}
+
+model tb_operator {
+  id_operator Int      @id @default(autoincrement())
+  name        String
+  limit       Int
+  createdAt   DateTime @default(now())
+}
+
+model tb_transaction {
+  id_transaction Int      @id @default(autoincrement())
+  id_queue       Int
+  id_operator    Int
+  status         String
+  createdAt      DateTime @default(now())
+}
