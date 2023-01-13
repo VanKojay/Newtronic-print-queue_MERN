@@ -21,7 +21,10 @@ function Operator() {
 
   //Room State
   const [room, setRoom] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState({
+    id: "0",
+    name: "0",
+  });
   const [messageReceived, setMessageReceived] = useState("");
 
   const sendMessage = () => {
@@ -29,9 +32,8 @@ function Operator() {
   };
 
   useEffect(() => {
-    setMessage("Coming Soon....");
     setRoom(3);
-  }, []);
+  }, [message]);
   return (
     <div className="card parent">
       <div
@@ -43,36 +45,46 @@ function Operator() {
             <label style={{ color: "black" }}>
               <h3>OPERATOR 1</h3>
             </label>
-            <form>
-              <table className="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">Nomor Antrian</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Nomor Telfon</th>
-                    <th scope="col"></th>
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Nomor Antrian</th>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Nomor Telfon</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {queue.map((queue, index) => (
+                  <tr key={queue.id_queue}>
+                    <th scope="row">{index + 1}</th>
+                    <td>{queue.name}</td>
+                    <td>{queue.phone_number}</td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          let updatedValue = {};
+                          updatedValue = {
+                            id: queue.id_queue,
+                            name: queue.name,
+                          };
+
+                          setMessage((message) => ({
+                            ...message,
+                            ...updatedValue,
+                          }));
+                          alert(JSON.stringify(message));
+                          sendMessage();
+                        }}
+                        className="btn btn-primary"
+                      >
+                        Panggil Antrian
+                      </button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {queue.map((queue, index) => (
-                    <tr key={queue.id_queue}>
-                      <th scope="row">{index + 1}</th>
-                      <td>{queue.name}</td>
-                      <td>{queue.phone_number}</td>
-                      <td>
-                        <button
-                          type="submit"
-                          onClick={sendMessage}
-                          className="btn btn-primary"
-                        >
-                          Panggil Antrian
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </form>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

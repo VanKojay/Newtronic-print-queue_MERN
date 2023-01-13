@@ -8,16 +8,20 @@ function Home() {
   // Messages States
 
   const [room, setRoom] = useState("");
-  const [messageReceived, setMessageReceived] = useState("");
+  const [messageReceived, setMessageReceived] = useState({
+    id: "0",
+    name: "0",
+  });
 
   useEffect(() => {
     console.log("connect :" + socket.connected);
     setRoom(3);
-    setMessageReceived("Belum Ada Antrian");
     socket.emit("join_room", room);
     socket.on("receive_message", (data) => {
       console.log("receive message :" + data);
-      setMessageReceived(data.message);
+      setMessageReceived(() => ({
+        ...data.message,
+      }));
     });
   }, [room]);
 
@@ -38,7 +42,7 @@ function Home() {
                   <h3>NOMOR ANTRIAN</h3>
                   <p>
                     <h1>
-                      <b>{messageReceived}</b>
+                      <b>{messageReceived.id}</b>
                     </h1>
                   </p>
                 </label>
@@ -49,7 +53,7 @@ function Home() {
                   <h3>ATAS NAMA</h3>
                   <p>
                     <h1>
-                      <b>{messageReceived}</b>
+                      <b>{messageReceived.name}</b>
                     </h1>
                   </p>
                 </label>
