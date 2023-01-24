@@ -6,7 +6,6 @@ const socket = io.connect("http://localhost:3001", { reconnect: true });
 
 function Home() {
   // Messages States
-
   const [room, setRoom] = useState("");
   const [messageReceived, setMessageReceived] = useState({
     id: "0",

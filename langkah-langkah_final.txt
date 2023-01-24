@@ -1,7 +1,8 @@
-1. Panggil API insert queue untuk insert ticket (Pendaftaran)
+1. OK-Panggil API insert queue untuk insert ticket (Pendaftaran)
 2. OK-Buat table untuk menampilkan isi dari table queue
 3. OK-Ubah tampilan operator menjadi table
 4. OK-setiap row memiliki tombol untuk panggil
-5. get queue berdasarkan ID
-6. object queu	yg didapatkan set ke variable message untuk ditampilkan di home
-7. table auto update
+5. OK-get queue berdasarkan ID
+6. PENDING-Insert table auto refresh
+7. PENDING-table auto update
+8. PENDING-object queue	yg didapatkan set ke variable message untuk ditampilkan di home

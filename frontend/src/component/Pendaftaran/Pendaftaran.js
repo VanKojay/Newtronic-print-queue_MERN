@@ -4,6 +4,19 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Pendaftaran() {
+  //get data
+  const [queue, setQueue] = useState([]);
+  useEffect(() => {
+    getQueue();
+  }, []);
+  const getQueue = async () => {
+    const response = await axios.get("http://localhost:5000/queue");
+    setQueue(response.data);
+    console.log(response.data);
+  };
+  console.log("ini data " + queue);
+
+  //set data
   const [name, setName] = useState("");
   const [phone_number, setPhoneNumber] = useState("");
   const navigate = useNavigate();
@@ -54,6 +67,7 @@ function Pendaftaran() {
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />
               </div>
+
               <div className="form-group">
                 <label>NOMOR ANTRIAN</label>
                 <input
@@ -64,6 +78,17 @@ function Pendaftaran() {
                   readOnly
                 />
               </div>
+
+              {/* <div className="form-group">
+                <label>NOMOR ANTRIAN</label>
+                <input
+                  type="TEXT"
+                  className="form-control parent"
+                  id="exampleInputPassword1"
+                  placeholder="coba"
+                  readOnly
+                />
+              </div> */}
 
               <button type="submit" className="btn btn-primary">
                 Submit
